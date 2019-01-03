@@ -1,0 +1,40 @@
+{% extends "feed/base.html" %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+{# This html file is displayed to the user when they navigate to the 'See Matches' page. A list of all of the users are displayed along with their chosen hobbies.#}
+
+    <div class="content-section">
+    <h2 class="account-heading">Your Matches!</h2>
+    <br>
+    {# loops through array:'matches' #}
+    {% for user in matches %}
+        {# checks to see if the next username in array is the same as the currently logged in user. #} 
+        {% if user.user is user.username %}
+            <p></p>    
+        {% else %}
+            {# prints the username and hobby choices #}
+            <h4>{{ user.user }}</h4> <h5>{{ user.gender }}</h5>
+            <p>{{ user.hobbies }}</p> 
+        {% endif %}
+    {% endfor %}
+
+    </div>
+
+    <div class ="content-section">
+        <h2>Filter</h2>
+        <form method="GET">
+        <h4>Gender</h4>
+        Male: <input type="radio" id="m">
+            <br>
+        Female: <input type="radio" id="f">
+            <br>
+            <br>
+            <h4>Age</h4>
+            Between <input type="text" id="age1"> and <input type="text" name="age2"><br><br>
+            <input type="submit" value="Submit" id="update">
+            </form>
+        
+    </div>
+
+{% endblock content %}
